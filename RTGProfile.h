@@ -9,13 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "RTGDefines.h"
 
+#if DEBUG
+
 RTG_EXTERN void RTGProfileInit();
-RTG_EXTERN void RTGProfileTag(NSString *);
+RTG_EXTERN void RTGProfileTag(NSString *, ...);
 RTG_EXTERN void RTGProfileEnd();
 
-RTG_EXTERN void RTGProfileEventBegin(NSString *);
-RTG_EXTERN void RTGProfileEventEnd(NSString *);
+RTG_EXTERN void RTGProfileEventBegin(NSString *, ...);
+RTG_EXTERN void RTGProfileEventEnd(NSString *, ...);
 
-@interface RTGProfile : NSObject
+#else
 
-@end
+#define RTGProfileInit()
+#define RTGProfileTag(...)
+#define RTGProfileEnd()
+
+#define RTGProfileEventBegin(...)
+#define RTGProfileEventEnd(...)
+
+#endif
